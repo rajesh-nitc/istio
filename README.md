@@ -38,6 +38,10 @@ kubectl apply -f kubernetes-manifests/
 kubectl apply -f istio-manifests/
 kubectl get svc istio-ingressgateway -n istio-system
 ```
+### Test
+```
+curl http://$INGRESS_GATEWAY/getDataFromSvcB
+```
 ## Clean Up
 ```
 gcloud container clusters delete first-cluster --zone us-central1-a
