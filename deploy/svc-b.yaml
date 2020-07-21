@@ -1,0 +1,60 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: app-b
+  labels:
+    name: app-b
+spec:
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        name: app-b
+    spec:
+      containers:
+        - image: gcr.io/first-project-283216/image-b
+          name: app-b
+          imagePullPolicy: Always
+          resources:
+            requests:
+              cpu: "20m"
+              memory: "55M"
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3002
+            initialDelaySeconds: 90
+            timeoutSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3002
+            initialDelaySeconds: 30
+            timeoutSeconds: 10
+          ports:
+            - containerPort: 3002
+              name: app-b-port
+          volumeMounts:
+            - mountPath: /data-b
+              name: data-b
+      volumes:
+        - name: data-b
+          emptyDir: {}
+      
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: app-b-service
+spec:
+  selector:
+    name: app-b
+  type: ClusterIP
+  ports:
+    - name: portb
+      port: 80
+      targetPort: 3002
