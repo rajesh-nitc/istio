@@ -1,4 +1,5 @@
-# Cloud Operations GKE
+# Istio
+2 microservices A and B running on GKE
 ## Prerequisites
 GKE Cluster Running with Istio Enabled
 
@@ -10,7 +11,7 @@ gcloud services enable container.googleapis.com
 ```
 
 ## Getting Started
-### Push Images to GCR
+### Push Images for Microservice A and B to GCR
 ```
 gcloud alpha cloud-shell ssh
 PROJECT_ID=$(gcloud config get-value project)
@@ -35,7 +36,6 @@ kubectl apply -f kubernetes-manifests/
 ### Istio Ingress Gateway
 ```
 kubectl apply -f istio-manifests/
-istioctl analyze
 kubectl get svc istio-ingressgateway -n istio-system
 ```
 ## Clean Up
