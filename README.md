@@ -15,11 +15,11 @@ gcloud services enable container.googleapis.com
 gcloud alpha cloud-shell ssh
 PROJECT_ID=$(gcloud config get-value project)
 git clone https://github.com/rajesh-nitc/operations-gke.git
-cd operations-gke/services/svc-a
+cd operations-gke/src/svc-a
 docker build -t image-a .
 docker tag image-a gcr.io/$PROJECT_ID/image-a
 docker push gcr.io/first-project-283216/image-a
-cd operations-gke/services/svc-b
+cd operations-gke/src/svc-b
 docker build -t image-b .
 docker tag image-b gcr.io/$PROJECT_ID/image-b
 docker push gcr.io/first-project-283216/image-b
@@ -30,11 +30,14 @@ kubectl label namespace default istio-injection=enabled
 ```
 ### Deploy on GKE
 ```
-kubectl apply -f deploy/
+kubectl apply -f kubernetes-manifests/
 ```
-### Istio
-
-
+### Istio Ingress Gateway
+```
+kubectl apply -f istio-manifests/
+istioctl analyze
+kubectl get svc istio-ingressgateway -n istio-system
+```
 ## Clean Up
 ```
 gcloud container clusters delete first-cluster --zone us-central1-a
