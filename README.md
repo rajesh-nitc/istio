@@ -1,5 +1,5 @@
 # Istio
-2 microservices A and B running on GKE
+Service Mesh for 2 Nodejs microservices A and B under ```src```
 ## Prerequisites
 GKE Cluster Running with Istio Enabled
 
