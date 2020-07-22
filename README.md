@@ -11,19 +11,15 @@ gcloud services enable container.googleapis.com
 ```
 
 ## Getting Started
-### Push Images for Microservice A and B to GCR
+### Push Microservice A and B to GCR
 ```
 gcloud alpha cloud-shell ssh
 PROJECT_ID=$(gcloud config get-value project)
 git clone https://github.com/rajesh-nitc/operations-gke.git
-cd operations-gke/src/svc-a
+cd istio/src/svc-a
 docker build -t image-a .
 docker tag image-a gcr.io/$PROJECT_ID/image-a
 docker push gcr.io/first-project-283216/image-a
-cd operations-gke/src/svc-b
-docker build -t image-b .
-docker tag image-b gcr.io/$PROJECT_ID/image-b
-docker push gcr.io/first-project-283216/image-b
 ```
 ### Enable Automatic Istio Injection
 ```
