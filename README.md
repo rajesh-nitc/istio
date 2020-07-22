@@ -21,7 +21,7 @@ docker build -t image-a .
 docker tag image-a gcr.io/$PROJECT_ID/image-a
 docker push gcr.io/first-project-283216/image-a
 ```
-### Enable Automatic Istio Injection
+### Automatic Istio Injection
 ```
 kubectl label namespace default istio-injection=enabled
 ```

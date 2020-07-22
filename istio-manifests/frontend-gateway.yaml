@@ -38,4 +38,3 @@ spec:
         host: app-a-service
         port:
           number: 80
-        # subset: v1
